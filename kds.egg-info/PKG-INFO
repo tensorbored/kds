@@ -1,0 +1,24 @@
+Metadata-Version: 1.1
+Name: kds
+Version: 0.0.1
+Summary: An intuitive library to plot evalution metrics.
+Home-page: UNKNOWN
+Author: Prateek Sharma
+Author-email: s.prateek3080@gmail.com
+License: MIT License
+Description: Simple library for lift chart, gain chart and KS chart/table library.
+        
+        Change Log
+        
+        ================
+        
+        0.0.1 (26/01/2021)
+        ------------------------
+        - First Release
+Keywords: calculator
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Education/Science/Research
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
