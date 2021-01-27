@@ -11,9 +11,9 @@ classifiers = [
 setup(
   name='kds',
   version='0.1.0',
-  description='An intuitive library to plot evalution metrics.',
+  description='An intuitive library to plot evaluation metrics.',
   long_description=open('README.md').read() + '\n\n' + open('CHANGELOG.txt').read(),
-  url='',
+  url='https://github.com/tensorbored/kds',
   author='Prateek Sharma',
   author_email='s.prateek3080@gmail.com',
   license='MIT License', 
