@@ -9,4 +9,5 @@ kds/metrics.py
 kds.egg-info/PKG-INFO
 kds.egg-info/SOURCES.txt
 kds.egg-info/dependency_links.txt
+kds.egg-info/requires.txt
 kds.egg-info/top_level.txt

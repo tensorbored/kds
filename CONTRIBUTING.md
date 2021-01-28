@@ -1,6 +1,6 @@
 ## Steps for contributing
 
-Fixing a bug you found in Scikit-plot? Suggesting a feature? Adding your own plotting function? Listed here are some guidelines to keep in mind when contributing.
+Listed here are some guidelines to keep in mind when contributing.
 
 1. **Open an issue** along with detailed explanation. For bug reports, include the code to reproduce the bug. For feature requests, explain why you think the feature could be useful.
 
@@ -16,4 +16,4 @@ Fixing a bug you found in Scikit-plot? Suggesting a feature? Adding your own plo
 
 7. **Submit a pull request**. After submitting a PR, if all tests pass, your code will be reviewed and merged promptly.
 
-Thank you for taking the time to make Scikit-plot better!
+Thank you for taking the time to make kds better!

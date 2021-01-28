@@ -1,34 +1,33 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-plt.style.use('ggplot')
 
 def print_labels():
 
     print(
         "LABELS INFO:\n\n",
-        "prob_min:          Minimum probability in a particular decile\n", 
-        "prob_max:          Minimum probability in a particular decile\n",
-        "prob_avg:          Average probability in a particular decile\n",
-        "cnt_events:        Count of events in a particular decile\n",
-        "cnt_resp:          Count of responders in a particular decile\n",
-        "cnt_non_resp:      Count of non-responders in a particular decile\n",
-        "cnt_resp_rndm:     Count of responders if events assigned randomly in a particular decile\n",
-        "cnt_resp_wiz:      Count of best possible responders in a particular decile\n",
-        "resp_rate:         responders rate in a particular decile [(cnt_resp/cnt_cust)*100]\n",
-        "cum_events:        Cumulative sum of events decile-wise \n",
-        "cum_resp:          Cumulative sum of responders decile-wise \n",
-        "cum_resp_wiz:      Cumulative sum of best possible responders decile-wise \n",
-        "cum_non_resp:      Cumulative sum of non-responders decile-wise \n",
-        "cum_events_pct:    Cumulative sum of percentages of events decile-wise \n",
-        "cum_resp_pct:      Cumulative sum of percentages of responders decile-wise \n",
-        "cum_resp_pct_wiz:  Cumulative sum of percentages of best possible responders decile-wise \n",
-        "cum_non_resp_pct:  Cumulative sum of percentages of non-responders decile-wise \n",
-        "KS:                KS Statistic decile-wise \n",
-        "lift:              Cumuative Lift Value decile-wise",
+        "prob_min         : Minimum probability in a particular decile\n", 
+        "prob_max         : Minimum probability in a particular decile\n",
+        "prob_avg         : Average probability in a particular decile\n",
+        "cnt_events       : Count of events in a particular decile\n",
+        "cnt_resp         : Count of responders in a particular decile\n",
+        "cnt_non_resp     : Count of non-responders in a particular decile\n",
+        "cnt_resp_rndm    : Count of responders if events assigned randomly in a particular decile\n",
+        "cnt_resp_wiz     : Count of best possible responders in a particular decile\n",
+        "resp_rate        : Response Rate in a particular decile [(cnt_resp/cnt_cust)*100]\n",
+        "cum_events       : Cumulative sum of events decile-wise \n",
+        "cum_resp         : Cumulative sum of responders decile-wise \n",
+        "cum_resp_wiz     : Cumulative sum of best possible responders decile-wise \n",
+        "cum_non_resp     : Cumulative sum of non-responders decile-wise \n",
+        "cum_events_pct   : Cumulative sum of percentages of events decile-wise \n",
+        "cum_resp_pct     : Cumulative sum of percentages of responders decile-wise \n",
+        "cum_resp_pct_wiz : Cumulative sum of percentages of best possible responders decile-wise \n",
+        "cum_non_resp_pct : Cumulative sum of percentages of non-responders decile-wise \n",
+        "KS               : KS Statistic decile-wise \n",
+        "lift             : Cumuative Lift Value decile-wise",
          )
 
-def decile_table(y_true,y_prob,labels=True,round_decimal=3):
+def decile_table(y_true, y_prob, labels=True, round_decimal=3):
     """Generates the Decile Table from labels and probabilities
     
     The Decile Table is creared by first sorting the customers by their predicted 
@@ -45,10 +44,10 @@ def decile_table(y_true,y_prob,labels=True,round_decimal=3):
             Prediction probabilities for each class returned by a classifier/algorithm.
 
         labels (bool, optional): If True, prints a legend for the abbreviations of
-        decile table column names. Defaults to True.
+            decile table column names. Defaults to True.
 
         round_decimal (int, optional): The decimal precision till which the result is 
-        needed. Defaults to '3'.
+            needed. Defaults to '3'.
 
     Returns:
         dt: The dataframe dt (decile-table) with the deciles and related information.
@@ -121,7 +120,8 @@ def decile_table(y_true,y_prob,labels=True,round_decimal=3):
 
 
 
-def plot_lift(y_true,y_prob,title='Lift Plot',title_fontsize=14,text_fontsize=10,figsize=None):
+def plot_lift(y_true, y_prob, title='Lift Plot', title_fontsize=14, 
+              text_fontsize=10, figsize=None):
     """Generates the Decile based cumulative Lift Plot from labels and probabilities
 
     The lift curve is used to determine the effectiveness of a
@@ -169,7 +169,7 @@ def plot_lift(y_true,y_prob,title='Lift Plot',title_fontsize=14,text_fontsize=10
     # Cumulative Lift Plot
     # plt.subplot(2, 2, 1)
 
-    pl = decile_table(y_true,y_prob,labels=False,round_decimal=2)
+    pl = decile_table(y_true,y_prob,labels=False)
     plt.plot(pl.decile.values, pl.lift.values, marker='o', label='Model')
     # plt.plot(list(np.arange(1,11)), np.ones(10), 'k--',marker='o')
     plt.plot([1, 10], [1, 1], 'k--', marker='o', label='Random')
@@ -180,7 +180,8 @@ def plot_lift(y_true,y_prob,title='Lift Plot',title_fontsize=14,text_fontsize=10
     plt.grid(True)
     # plt.show()
 
-def plot_lift_decile_wise(y_true,y_prob,title='Decile-wise Lift Plot',title_fontsize=14,text_fontsize=10,figsize=None):
+def plot_lift_decile_wise(y_true, y_prob, title='Decile-wise Lift Plot', 
+                          title_fontsize=14, text_fontsize=10, figsize=None):
     """Generates the Decile-wise Lift Plot from labels and probabilities
 
     The lift curve is used to determine the effectiveness of a
@@ -226,7 +227,7 @@ def plot_lift_decile_wise(y_true,y_prob,title='Decile-wise Lift Plot',title_font
     """
     # Decile-wise Lift Plot
     # plt.subplot(2, 2, 2)
-    pldw = decile_table(y_true,y_prob,labels=False,round_decimal=2)
+    pldw = decile_table(y_true,y_prob,labels=False)
     plt.plot(pldw.decile.values, pldw.cnt_resp.values / pldw.cnt_resp_rndm.values, marker='o', label='Model')
     # plt.plot(list(np.arange(1,11)), np.ones(10), 'k--',marker='o')
     plt.plot([1, 10], [1, 1], 'k--', marker='o', label='Random')
@@ -239,7 +240,8 @@ def plot_lift_decile_wise(y_true,y_prob,title='Decile-wise Lift Plot',title_font
 
 
 
-def plot_cumulative_gain(y_true,y_prob,title='Cumulative Gain Plot',title_fontsize=14,text_fontsize=10,figsize=None):
+def plot_cumulative_gain(y_true, y_prob, title='Cumulative Gain Plot',
+                         title_fontsize=14, text_fontsize=10, figsize=None):
     """Generates the cumulative Gain Plot from labels and probabilities
 
     The cumulative gains chart is used to determine the effectiveness of a
@@ -286,7 +288,7 @@ def plot_cumulative_gain(y_true,y_prob,title='Cumulative Gain Plot',title_fontsi
 
     # Cumulative Gains Plot
     # plt.subplot(2, 2, 3)
-    pcg = decile_table(y_true,y_prob,labels=False,round_decimal=2)
+    pcg = decile_table(y_true,y_prob,labels=False)
     plt.plot(np.append(0, pcg.decile.values), np.append(0, pcg.cum_resp_pct.values), marker='o', label='Model')
     plt.plot(np.append(0, pcg.decile.values), np.append(0, pcg.cum_resp_pct_wiz.values), 'c--', label='Wizard')
     # plt.plot(list(np.arange(1,11)), np.ones(10), 'k--',marker='o')
@@ -300,7 +302,7 @@ def plot_cumulative_gain(y_true,y_prob,title='Cumulative Gain Plot',title_fontsi
 
 
 
-def plot_ks_statistic(y_true, y_prob,title='KS Statistic Plot', 
+def plot_ks_statistic(y_true, y_prob, title='KS Statistic Plot', 
                       title_fontsize=14, text_fontsize=10, figsize=None):
     """Generates the KS Statistic Plot from labels and probabilities
 
@@ -348,7 +350,7 @@ def plot_ks_statistic(y_true, y_prob,title='KS Statistic Plot',
     """
     # KS Statistic Plot
     # plt.subplot(2, 2, 4)
-    pks = decile_table(y_true,y_prob,labels=False,round_decimal=2)
+    pks = decile_table(y_true, y_prob, labels=False)
 
     plt.plot(np.append(0, pks.decile.values), np.append(0, pks.cum_resp_pct.values),
              marker='o', label='Responders')
@@ -370,8 +372,8 @@ def plot_ks_statistic(y_true, y_prob,title='KS Statistic Plot',
 
 
 
-def report(y_true,y_prob,labels=True,round_decimal=2,
-           title_fontsize=14,text_fontsize=10,figsize=(16, 10)):
+def report(y_true, y_prob, labels=True, plot_style = None, round_decimal=3, 
+           title_fontsize=14, text_fontsize=10, figsize=(16, 10)):
     """Generates decile table and 4 plots (Lift, Lift@Decile, Gain and KS) 
     from labels and probabilities
     
@@ -381,6 +383,18 @@ def report(y_true,y_prob,labels=True,round_decimal=2,
 
         y_prob (array-like, shape (n_samples, n_classes)):
             Prediction probabilities for each class returned by a classifier.
+
+        labels (bool, optional): If True, prints a legend for the abbreviations of
+            decile table column names. Defaults to True.
+
+        plot_style(string, optional): Check available styles "plt.style.available".
+            few examples: ['ggplot', 'seaborn', 'bmh', 'classic', 'dark_background', 
+            'fivethirtyeight', 'grayscale', 'seaborn-bright', 'seaborn-colorblind', 
+            'seaborn-dark', 'seaborn-dark-palette', 'tableau-colorblind10','fast'] 
+            Defaults to ``None``.
+
+        round_decimal (int, optional): The decimal precision till which the result is 
+            needed. Defaults to '3'.
 
         title_fontsize (string or int, optional): Matplotlib-style fontsizes.
             Use e.g. "small", "medium", "large" or integer-values (8, 10, 12, etc.)
@@ -411,6 +425,11 @@ def report(y_true,y_prob,labels=True,round_decimal=2,
     
     dc = decile_table(y_true,y_prob,labels=labels,round_decimal=round_decimal)
 
+    if plot_style is None:
+        None
+    else:
+        plt.style.use(plot_style)
+    
     fig = plt.figure(figsize=figsize)
 
     # Cumulative Lift Plot
