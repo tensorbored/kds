@@ -10,7 +10,7 @@ kds.metrics.report(y_test, y_prob)
 ```
 Report has an argument ``plot_style`` which has multiple plot style options. For more, explore examples !!
 
-![readme_report.gif](attachment:readme_report.gif)
+![readme_report.gif]((docs/_static/readme_report.gif)
 
 kds is the result of a data scientist's humble effort to provide an easy way of visualizing metrics. So that one can focus on the analysis rather than hassling with copy/paste of various visialization functions.
 
@@ -52,7 +52,7 @@ y_prob = clf.predict_proba(X_test)
 import kds
 kds.metrics.plot_lift(y_test, y_prob[:,1])
 ```
-![readme_lift.png](attachment:readme_lift.png)
+![readme_lift.png]((docs/_static/readme_lift.png)
 
 Yup... That's it. **single line functions for detailed visualization**.
 
@@ -79,7 +79,7 @@ y_prob = clf.predict_proba(X_test)
 import kds
 kds.metrics.plot_cumulative_gain(y_test, y_prob[:,1])
 ```
-![readme_cumulative_gain.png](attachment:readme_cumulative_gain.png)
+![readme_cumulative_gain.png]((docs/_static/readme_cumulative_gain.png)
 
 ### 3. KS Statistic Plot
 
@@ -100,7 +100,7 @@ y_prob = clf.predict_proba(X_test)
 import kds
 kds.metrics.plot_ks_statistic(y_test, y_prob[:,1])
 ```
-![readme_ks_statistic.png](attachment:readme_ks_statistic.png)
+![readme_ks_statistic.png]((docs/_static/readme_ks_statistic.png)
 
 ### 4. Decile Table
 
@@ -121,7 +121,7 @@ y_prob = clf.predict_proba(X_test)
 import kds
 kds.metrics.decile_table(y_test, y_prob[:,1])
 ```
-![readme_decile_table.jpg](attachment:readme_decile_table.jpg)
+![readme_decile_table.jpg]((docs/_static/readme_decile_table.jpg)
 
 ### 5. Report
 
@@ -144,7 +144,7 @@ kds.metrics.report(y_test, y_prob[:,1],plot_style='ggplot')
 ```
 Choose among multiple ``plot_style`` list using ``plt.style.available``, to generate quick and beautiful plots.
 
-![readme_report.png](attachment:readme_report.png)
+![readme_report.png]((docs/_static/readme_report.png)
 
 
 ## Contributing to kds
