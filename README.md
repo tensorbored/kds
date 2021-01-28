@@ -52,7 +52,7 @@ y_prob = clf.predict_proba(X_test)
 import kds
 kds.metrics.plot_lift(y_test, y_prob[:,1])
 ```
-![readme_lift.png]((docs/_static/readme_lift.png)
+![readme_lift.png](docs/_static/readme_lift.png)
 
 Yup... That's it. **single line functions for detailed visualization**.
 
