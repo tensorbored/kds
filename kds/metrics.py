@@ -27,7 +27,9 @@ def print_labels():
         "lift             : Cumuative Lift Value decile-wise",
          )
 
-def decile_table(y_true, y_prob, labels=True, round_decimal=3):
+
+
+def decile_table(y_true, y_prob, change_deciles=10, labels=True, round_decimal=3):
     """Generates the Decile Table from labels and probabilities
     
     The Decile Table is creared by first sorting the customers by their predicted 
@@ -42,6 +44,9 @@ def decile_table(y_true, y_prob, labels=True, round_decimal=3):
 
         y_prob (array-like, shape (n_samples, n_classes)):
             Prediction probabilities for each class returned by a classifier/algorithm.
+
+        change_deciles (int, optional): The number of partitions for creating the table
+            can be changed. Defaults to '10' for deciles.
 
         labels (bool, optional): If True, prints a legend for the abbreviations of
             decile table column names. Defaults to True.
@@ -74,7 +79,7 @@ def decile_table(y_true, y_prob, labels=True, round_decimal=3):
     # ValueError: Bin edges must be unique
 
     df.sort_values('y_prob', ascending=False, inplace=True)
-    df['decile'] = np.linspace(1, 11, len(df), False, dtype=int)
+    df['decile'] = np.linspace(1, change_deciles+1, len(df), False, dtype=int)
 
     # dt abbreviation for decile_table
     dt = df.groupby('decile').apply(lambda x: pd.Series([
@@ -95,9 +100,9 @@ def decile_table(y_true, y_prob, labels=True, round_decimal=3):
     # dt=dt.sort_values(by='decile',ascending=False).reset_index(drop=True)
 
     tmp = df[['y_true']].sort_values('y_true', ascending=False)
-    tmp['decile'] = np.linspace(1, 11, len(tmp), False, dtype=int)
+    tmp['decile'] = np.linspace(1, change_deciles+1, len(tmp), False, dtype=int)
 
-    dt['cnt_resp_rndm'] = np.sum(df['y_true']) / 10
+    dt['cnt_resp_rndm'] = np.sum(df['y_true']) / change_deciles
     dt['cnt_resp_wiz'] = tmp.groupby('decile', as_index=False)['y_true'].sum()['y_true']
 
     dt['resp_rate'] = round(dt['cnt_resp'] * 100 / dt['cnt_cust'], round_decimal)
@@ -179,6 +184,8 @@ def plot_lift(y_true, y_prob, title='Lift Plot', title_fontsize=14,
     plt.legend()
     plt.grid(True)
     # plt.show()
+
+
 
 def plot_lift_decile_wise(y_true, y_prob, title='Decile-wise Lift Plot', 
                           title_fontsize=14, text_fontsize=10, figsize=None):
