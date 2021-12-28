@@ -260,8 +260,9 @@ def plot_cumulative_gain(y_true, *y_scores, title='Cumulative Gain Plot',
         y_true (array-like, shape (n_samples)):
             Ground truth (correct) target values.
 
-        y_prob (array-like, shape (n_samples, n_classes)):
-            Prediction probabilities for each class returned by a classifier.
+        y_scores (array-like, shape(n_samples,)):
+            Prediction probabilities for each class returned by multiple classifiers or 
+            prediction scores for different classes.
         
         title (string, optional): Title of the generated plot. Defaults to
             "Decile-wise Lift Plot".
@@ -302,8 +303,8 @@ def plot_cumulative_gain(y_true, *y_scores, title='Cumulative Gain Plot',
     for i, y_prob in enumerate(y_scores):
         pcg = decile_table(y_true,y_prob,labels=False)
         ax.plot(np.append(0, pcg.decile.values), np.append(0, pcg.cum_resp_pct.values), marker='o', label=f'Model {i+1}')
-    
-    ax.plot(np.append(0, pcg.decile.values), np.append(0, pcg.cum_resp_pct_wiz.values), 'c--', label=f'Wizard')
+        if i == 0:
+            ax.plot(np.append(0, pcg.decile.values), np.append(0, pcg.cum_resp_pct_wiz.values), 'c--', label=f'Wizard')
         
     ax.set_title(title, fontsize=title_fontsize)
     ax.set_xlabel('Deciles', fontsize=text_fontsize)
