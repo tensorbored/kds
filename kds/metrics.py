@@ -259,20 +259,27 @@ def plot_cumulative_gain(y_true, *y_scores, title='Cumulative Gain Plot',
     Args:
         y_true (array-like, shape (n_samples)):
             Ground truth (correct) target values.
+
         y_prob (array-like, shape (n_samples, n_classes)):
             Prediction probabilities for each class returned by a classifier.
+        
         title (string, optional): Title of the generated plot. Defaults to
             "Decile-wise Lift Plot".
+        
         title_fontsize (string or int, optional): Matplotlib-style fontsizes.
             Use e.g. "small", "medium", "large" or integer-values (8, 10, 12, etc.)
             Defaults to 14.
+        
         text_fontsize (string or int, optional): Matplotlib-style fontsizes.
             Use e.g. "small", "medium", "large" or integer-values (8, 10, 12, etc.)
             Defaults to 10.
+        
         figsize (2-tuple, optional): Tuple denoting figure size of the plot
             e.g. (6, 6). Defaults to ``None``.
+    
     Returns:
         None
+    
     Example:
         >>> import kds
         >>> from sklearn.datasets import load_iris
