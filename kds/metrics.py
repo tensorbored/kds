@@ -247,10 +247,10 @@ def plot_lift_decile_wise(y_true, y_prob, title='Decile-wise Lift Plot',
 
 
 
-def plot_cumulative_gain(y_true, y_prob, title='Cumulative Gain Plot',
-                         title_fontsize=14, text_fontsize=10, figsize=None):
+def plot_cumulative_gain(y_true, *y_scores, title='Cumulative Gain Plot',
+                         title_fontsize=14, text_fontsize=10, figsize=None,
+                         ax=None):
     """Generates the cumulative Gain Plot from labels and probabilities
-
     The cumulative gains chart is used to determine the effectiveness of a
     binary classifier. A detailed explanation can be found at
     http://www2.cs.uregina.ca/~dbd/cs831/notes/lift_chart/lift_chart.html 
@@ -260,26 +260,27 @@ def plot_cumulative_gain(y_true, y_prob, title='Cumulative Gain Plot',
         y_true (array-like, shape (n_samples)):
             Ground truth (correct) target values.
 
-        y_prob (array-like, shape (n_samples, n_classes)):
-            Prediction probabilities for each class returned by a classifier.
-
+        y_scores (array-like, shape(n_samples,)):
+            Prediction probabilities for each class returned by multiple classifiers or 
+            prediction scores for different classes.
+        
         title (string, optional): Title of the generated plot. Defaults to
             "Decile-wise Lift Plot".
-
+        
         title_fontsize (string or int, optional): Matplotlib-style fontsizes.
             Use e.g. "small", "medium", "large" or integer-values (8, 10, 12, etc.)
             Defaults to 14.
-
+        
         text_fontsize (string or int, optional): Matplotlib-style fontsizes.
             Use e.g. "small", "medium", "large" or integer-values (8, 10, 12, etc.)
             Defaults to 10.
-
+        
         figsize (2-tuple, optional): Tuple denoting figure size of the plot
             e.g. (6, 6). Defaults to ``None``.
-
+    
     Returns:
         None
-
+    
     Example:
         >>> import kds
         >>> from sklearn.datasets import load_iris
@@ -294,18 +295,23 @@ def plot_cumulative_gain(y_true, y_prob, title='Cumulative Gain Plot',
     """
 
     # Cumulative Gains Plot
-    # plt.subplot(2, 2, 3)
-    pcg = decile_table(y_true,y_prob,labels=False)
-    plt.plot(np.append(0, pcg.decile.values), np.append(0, pcg.cum_resp_pct.values), marker='o', label='Model')
-    plt.plot(np.append(0, pcg.decile.values), np.append(0, pcg.cum_resp_pct_wiz.values), 'c--', label='Wizard')
-    # plt.plot(list(np.arange(1,11)), np.ones(10), 'k--',marker='o')
-    plt.plot([0, 10], [0, 100], 'k--', marker='o', label='Random')
-    plt.title(title, fontsize=title_fontsize)
-    plt.xlabel('Deciles', fontsize=text_fontsize)
-    plt.ylabel('% Resonders', fontsize=text_fontsize)
-    plt.legend()
-    plt.grid(True)
-    # plt.show()
+    if not ax:
+        fig, ax = plt.subplots(figsize=figsize)
+    
+    ax.plot([0, 10], [0, 100], 'k--', marker='o', label='Random')
+    
+    for i, y_prob in enumerate(y_scores):
+        pcg = decile_table(y_true,y_prob,labels=False)
+        ax.plot(np.append(0, pcg.decile.values), np.append(0, pcg.cum_resp_pct.values), marker='o', label=f'Model {i+1}')
+        if i == 0:
+            ax.plot(np.append(0, pcg.decile.values), np.append(0, pcg.cum_resp_pct_wiz.values), 'c--', label=f'Wizard')
+        
+    ax.set_title(title, fontsize=title_fontsize)
+    ax.set_xlabel('Deciles', fontsize=text_fontsize)
+    ax.set_ylabel('% Resonders', fontsize=text_fontsize)
+    ax.legend()
+    ax.grid(True)
+    return ax
 
 
 
