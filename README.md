@@ -1,5 +1,6 @@
 # kds - KeyToDataScience Visualization Library
-
+[![Downloads](https://static.pepy.tech/badge/kds)](https://pepy.tech/project/kds)
+[![Downloads](https://static.pepy.tech/badge/kds/month)](https://pepy.tech/project/kds)
 
 ### Plot Decile Table, Lift, Gain and KS Statistic charts with single line functions
 
